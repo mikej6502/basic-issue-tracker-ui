@@ -1,2 +1,4 @@
 # basic-issue-tracker-ui
-Angular UI for basic-issue-tracker
+Project Created for teaching & learning purposes.
+
+Angular UI for basic-issue-tracker.
