@@ -20,7 +20,9 @@
       </thead>
       <tbody>
       <tr *ngFor='let task of tasks'>
-        <td>{{ task.id }}</td>
+        <td>
+          <a [routerLink]="['/issues', task.id]">{{ task.id }}</a>
+        </td>
         <td>{{ task.project }}</td>
         <td>{{ task.title }}</td>
         <td>{{ task.type }}</td>

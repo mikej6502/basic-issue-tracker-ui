@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import { ITask } from "../task";
+import {IssuesListService} from "../issues-list/issues-list-service";
+import {IssuesService} from "./issues-service";
 
 @Component({
   selector: 'app-issue-detail',
@@ -6,10 +10,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./issue-detail.component.css']
 })
 export class IssueDetailComponent implements OnInit {
+  pageTitle = 'Issue Detail'
+  task: ITask | undefined
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private issueService: IssuesService) {
 
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.pageTitle += `: ${id}`
+
+    this.issueService.getIssue(id)
+        .subscribe( task => this.task = task);
+  }
+
+
+  onBack(): void {
+    this.router.navigate(['issues']);
+  }
 }
