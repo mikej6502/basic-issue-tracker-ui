@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import {convertStatusPipe} from "./issue-status.pipe.ts";
 import { CreateIssueComponent } from './create-issue/create-issue.component';
 import {FormsModule} from "@angular/forms";
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import {FormsModule} from "@angular/forms";
         IssueDetailComponent,
         HomeComponent,
         convertStatusPipe,
-        CreateIssueComponent
+        CreateIssueComponent,
+        FooterComponent
     ],
     imports: [
         BrowserModule,
