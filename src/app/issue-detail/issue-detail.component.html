@@ -29,7 +29,13 @@
         </form>
     </div>
     <div class="card-footer">
-        <button type="button" class="btn btn-primary"(click)="onBack()">Back</button>
+        <button type="submit" class="btn btn-primary" (click)="onSave()">Save</button>
+        <button type="button" class="btn btn-danger"(click)="onBack()" style="float:right">Back</button>
+    </div>
+
+    <div class="alert alert-dismissible alert-danger" *ngIf="error">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Error!</strong><br>Unable to save issue
     </div>
 </div>
 

@@ -25,8 +25,6 @@ export class CreateIssueComponent implements OnInit {
         () => this.submitSuccessful(),
         error => this.submitFailed(error)
     );
-
-
   }
 
   onBack(): void {

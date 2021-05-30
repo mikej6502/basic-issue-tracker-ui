@@ -11,11 +11,11 @@ import {IssueService} from "./../issue.service";
 export class IssueDetailComponent implements OnInit {
   pageTitle = 'Issue'
   task: ITask | undefined
+  error = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private issueService: IssueService) {
-
   }
 
   ngOnInit(): void {
@@ -27,10 +27,25 @@ export class IssueDetailComponent implements OnInit {
   }
 
   onSave(): void {
-    // this.router.navigate(['issues']);
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.issueService.putIssue(id, this.task!).subscribe(
+        () => this.submitSuccessful(),
+        error => this.submitFailed(error)
+    );
   }
 
   onBack(): void {
     this.router.navigate(['issues']);
+  }
+
+  submitSuccessful() {
+    this.error = false;
+    this.router.navigate(['issues'])
+  }
+
+  submitFailed(error: any) {
+    console.log("error: ", error)
+    this.error = true
   }
 }

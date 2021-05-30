@@ -24,4 +24,8 @@ export class IssueService {
     postIssue(task: ITask): Observable<any> {
         return this.http.post(this.serviceUrl, task)
     }
+
+    putIssue(id: Number, task: ITask): Observable<any> {
+        return this.http.put(this.serviceUrl + '/' + id, task)
+    }
 }
