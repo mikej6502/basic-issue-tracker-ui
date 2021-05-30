@@ -45,7 +45,6 @@ export class IssueDetailComponent implements OnInit {
   }
 
   submitFailed(error: any) {
-    console.log("error: ", error)
     this.error = true
   }
 }
