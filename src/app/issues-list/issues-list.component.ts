@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ITask} from "../task";
-import {IssuesListService} from "./issues-list-service";
+import {IssueService} from "./../issue.service";
+import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-issues-list',
@@ -12,11 +14,15 @@ export class IssuesListComponent implements OnInit {
   pageTitle = "Issues";
   tasks: ITask[] = [];
 
-  constructor(private issuesService: IssuesListService) { }
+  constructor(private issuesService: IssueService, private router: Router) { }
 
   ngOnInit(): void {
     this.issuesService.getIssues().subscribe({
       next: tasks => this.tasks = tasks
     });
+  }
+
+  onNewIssue(): void {
+    this.router.navigate(['create']);
   }
 }

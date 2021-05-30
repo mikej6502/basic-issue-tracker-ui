@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { ITask } from "../task";
-import {IssuesListService} from "../issues-list/issues-list-service";
-import {IssuesService} from "./issues-service";
+import {IssueService} from "./../issue.service";
 
 @Component({
   selector: 'app-issue-detail',
@@ -15,7 +14,7 @@ export class IssueDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private issueService: IssuesService) {
+              private issueService: IssueService) {
 
   }
 
