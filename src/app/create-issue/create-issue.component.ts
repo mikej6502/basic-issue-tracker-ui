@@ -11,6 +11,7 @@ import {IssueService} from "./../issue.service";
 export class CreateIssueComponent implements OnInit {
   pageTitle = "Create Issue";
   task: ITask = {description: "", id: "", project: "TEST", status: "TODO", title: "", type: "STORY"};
+  error = false;
 
   constructor(private router: Router, private issueService: IssueService) {
 
@@ -20,14 +21,25 @@ export class CreateIssueComponent implements OnInit {
   }
 
   onSave(): void {
-    console.log(this.task)
     this.issueService.postIssue(this.task).subscribe(
-        result => console.log("success: ", result),
-        error => console.log("error: ", error)
+        () => this.submitSuccessful(),
+        error => this.submitFailed(error)
     );
+
+
   }
 
   onBack(): void {
     this.router.navigate(['issues']);
+  }
+
+  submitSuccessful() {
+    this.error = false;
+    this.router.navigate(['issues'])
+  }
+
+  submitFailed(error: any) {
+    console.log("error: ", error)
+    this.error = true
   }
 }
