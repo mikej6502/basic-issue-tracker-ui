@@ -7,14 +7,16 @@ import { IssuesListComponent } from './issues-list/issues-list.component';
 import {RouterModule} from "@angular/router";
 import { IssueDetailComponent } from './issue-detail/issue-detail.component';
 import { HomeComponent } from './home/home.component';
+import {convertStatusPipe} from "./issue-status.pipe.ts";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    IssuesListComponent,
-    IssueDetailComponent,
-    HomeComponent
-  ],
+    declarations: [
+        AppComponent,
+        IssuesListComponent,
+        IssueDetailComponent,
+        HomeComponent,
+        convertStatusPipe
+    ],
   imports: [
     BrowserModule,
     HttpClientModule,

@@ -1,11 +1,28 @@
-{{pageTitle}}
 <div class="card border-primary">
-    <div class="card-header">{{task?.title}}</div>
-    <div class="card-body" *ngIf='task'>{{task.description}}</div>
+    <div class="card-header"><b>{{task?.title}}</b></div>
+    <div class="card-body" *ngIf='task'>
+        <table cellpadding="2" style=" margin : 10px;">
+            <tr>
+                <td>Issue ID: </td>
+                <td>{{task.id}}</td>
+            </tr>
+            <tr>
+                <td>Issue Type: </td>
+                <td><span class="badge bg-secondary">{{task.type}}</span></td>
+            </tr>
+            <tr>
+                <td>Status: </td>
+                <td><span
+                        [ngClass]="(task.status=='DONE')?'badge rounded-pill bg-success':'badge rounded-pill bg-primary'">{{ task.status | convertStatus}}</span>
+                </td>
+            </tr>
+            <tr></tr>
+        </table>
+
+        <textarea class="form-control" id="description" rows="20">{{task.description}}</textarea>
+    </div>
     <div class="card-footer">
-        <button class="btn" (click)="onBack()" style="width:80px">
-            <i class="fa fa-chevron-left">Back</i>
-        </button>
+        <button type="button" class="btn btn-secondary" (click)="onBack()">Back</button>
     </div>
 </div>
 

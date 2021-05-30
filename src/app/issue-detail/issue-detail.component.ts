@@ -10,7 +10,7 @@ import {IssuesService} from "./issues-service";
   styleUrls: ['./issue-detail.component.css']
 })
 export class IssueDetailComponent implements OnInit {
-  pageTitle = 'Issue Detail'
+  pageTitle = 'Issue'
   task: ITask | undefined
 
   constructor(private route: ActivatedRoute,
@@ -26,7 +26,6 @@ export class IssueDetailComponent implements OnInit {
     this.issueService.getIssue(id)
         .subscribe( task => this.task = task);
   }
-
 
   onBack(): void {
     this.router.navigate(['issues']);
