@@ -26,6 +26,10 @@ export class IssueDetailComponent implements OnInit {
         .subscribe( task => this.task = task);
   }
 
+  onSave(): void {
+    // this.router.navigate(['issues']);
+  }
+
   onBack(): void {
     this.router.navigate(['issues']);
   }
