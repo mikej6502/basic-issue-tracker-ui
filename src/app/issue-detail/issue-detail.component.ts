@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { ITask } from "../task";
-import {IssuesListService} from "../issues-list/issues-list-service";
-import {IssuesService} from "./issues-service";
+import {IssueService} from "./../issue.service";
 
 @Component({
   selector: 'app-issue-detail',
@@ -12,11 +11,11 @@ import {IssuesService} from "./issues-service";
 export class IssueDetailComponent implements OnInit {
   pageTitle = 'Issue'
   task: ITask | undefined
+  error = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private issueService: IssuesService) {
-
+              private issueService: IssueService) {
   }
 
   ngOnInit(): void {
@@ -27,7 +26,25 @@ export class IssueDetailComponent implements OnInit {
         .subscribe( task => this.task = task);
   }
 
+  onSave(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.issueService.putIssue(id, this.task!).subscribe(
+        () => this.submitSuccessful(),
+        error => this.submitFailed(error)
+    );
+  }
+
   onBack(): void {
     this.router.navigate(['issues']);
+  }
+
+  submitSuccessful() {
+    this.error = false;
+    this.router.navigate(['issues'])
+  }
+
+  submitFailed(error: any) {
+    this.error = true
   }
 }

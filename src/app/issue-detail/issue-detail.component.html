@@ -1,29 +1,54 @@
-<div class="card border-primary">
-    <div class="card-header"><b>{{task?.title}}</b></div>
+<div class="card border-primary" style="margin: 10px">
+    <div class="card-header"><b>{{pageTitle}}</b></div>
     <div class="card-body" *ngIf='task'>
-        <table cellpadding="2" style=" margin : 10px;">
-            <tr>
-                <td>Issue ID: </td>
-                <td>{{task.id}}</td>
-            </tr>
-            <tr>
-                <td>Issue Type: </td>
-                <td><span class="badge bg-secondary">{{task.type}}</span></td>
-            </tr>
-            <tr>
-                <td>Status: </td>
-                <td><span
-                        [ngClass]="(task.status=='DONE')?'badge rounded-pill bg-success':'badge rounded-pill bg-primary'">{{ task.status | convertStatus}}</span>
-                </td>
-            </tr>
-            <tr></tr>
-        </table>
+        <form (ngSubmit)="onSave()" #taskForm="ngForm">
 
-        <textarea class="form-control" id="description" rows="20">{{task.description}}</textarea>
+            <div class="form-group">
+                <label for="issueType" class="form-label mt-4">Issue Type</label>
+                <select class="form-select" id="issueType" [(ngModel)]="task.type" name="type" #name="ngModel" >
+                    <option>EPIC</option>
+                    <option>STORY</option>
+                    <option>TASK</option>
+                    <option>BUG</option>
+                </select>
+
+            <div class="form-group">
+                <label for="status" class="form-label mt-4">Status</label>
+                <select class="form-select" id="status" [(ngModel)]="task.status" name="status" #name="ngModel">
+                    <option>TODO</option>
+                    <option>IN_PROGRESS</option>
+                    <option>DONE</option>
+                </select>
+            </div>
+
+            </div>
+            <div class="form-group">
+                <label for="project" class="form-label mt-4">Project</label>
+                <input type="text" class="form-control" id="project" placeholder="Project" [(ngModel)]="task.project" name="project" #name="ngModel">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputTitle" class="form-label mt-4">Title</label>
+                <input type="text" class="form-control" id="exampleInputTitle" placeholder="Title" [(ngModel)]="task.title" name="title" #name="ngModel">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleTextarea" class="form-label mt-4">Description</label>
+                <textarea class="form-control" id="exampleTextarea" rows="5" [(ngModel)]="task.description" name="description" #name="ngModel"></textarea>
+            </div>
+        </form>
     </div>
     <div class="card-footer">
-        <button type="button" class="btn btn-secondary" (click)="onBack()">Back</button>
+        <button type="submit" class="btn btn-primary" (click)="onSave()">Save</button>
+        <button type="button" class="btn btn-danger"(click)="onBack()" style="float:right">Back</button>
+    </div>
+
+    <div class="alert alert-dismissible alert-danger" *ngIf="error">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Error!</strong><br>Unable to save issue
     </div>
 </div>
+
+
 
 
