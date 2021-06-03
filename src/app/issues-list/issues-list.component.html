@@ -30,7 +30,7 @@
         <td>{{ task.project }}</td>
         <td>{{ task.title }}</td>
         <td>{{ task.type }}</td>
-        <td><span [ngClass]="(task.status=='DONE')?'badge rounded-pill bg-success':'badge rounded-pill bg-primary'">{{ task.status | convertStatus}}</span></td>
+        <td><span [ngClass]="(task.status=='DONE')?'badge rounded-pill bg-success':'badge rounded-pill bg-primary'">{{ task.status | ConvertStatus}}</span></td>
       </tr>
       </tbody>
     </table>

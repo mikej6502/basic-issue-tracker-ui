@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from "@angular/core"
 
 @Pipe({
-    name: 'convertStatus'
+    name: 'ConvertStatus'
 })
-export class convertStatusPipe implements PipeTransform {
+export class ConvertStatusPipe implements PipeTransform {
 
     transform(value: string): string {
         if(value == "IN_PROGRESS") {
