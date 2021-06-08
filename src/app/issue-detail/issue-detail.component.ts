@@ -19,7 +19,7 @@ export class IssueDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = String(this.route.snapshot.paramMap.get('id'));
     this.pageTitle += `: ${id}`
 
     this.issueService.getIssue(id)
@@ -27,7 +27,7 @@ export class IssueDetailComponent implements OnInit {
   }
 
   onSave(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = String(this.route.snapshot.paramMap.get('id'));
 
     this.issueService.putIssue(id, this.task!).subscribe(
         () => this.submitSuccessful(),

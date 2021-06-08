@@ -14,7 +14,7 @@ export class IssueService {
 
     }
 
-    getIssue(id: Number): Observable<ITask> {
+    getIssue(id: String): Observable<ITask> {
         return this.http.get<ITask>(this.baseUrl + '/task/' + id);
     }
 
@@ -26,7 +26,7 @@ export class IssueService {
         return this.http.post(this.baseUrl + '/task', task)
     }
 
-    putIssue(id: Number, task: ITask): Observable<any> {
+    putIssue(id: String, task: ITask): Observable<any> {
         return this.http.put(this.baseUrl + '/task/' + id, task)
     }
 }
