@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ITask} from "../task";
 import {IssueService} from "./../issue.service";
 import {Router} from "@angular/router";
+import {IPagedResponse} from "../paged-response";
 
 
 @Component({
@@ -12,17 +13,44 @@ import {Router} from "@angular/router";
 export class IssuesListComponent implements OnInit {
 
   pageTitle = "Issues";
-  tasks: ITask[] = [];
+  tasks: ITask[] = []
+  totalPages = 0
+  currentPage = 0
 
   constructor(private issuesService: IssueService, private router: Router) { }
 
   ngOnInit(): void {
-    this.issuesService.getIssues().subscribe({
-      next: tasks => this.tasks = tasks
-    });
+    this.issuesService.getIssues(0).subscribe( (response: IPagedResponse ) => {
+      this.tasks = response.tasks
+      this.totalPages = response.pages.totalPages
+      this.currentPage = response.pages.currentPage
+    }
+   )
+  }
+
+  counter() {
+    return new Array(this.totalPages);
   }
 
   onNewIssue(): void {
     this.router.navigate(['create']);
+  }
+
+
+  onGetPage(index: number): void {
+    this.issuesService.getIssues(index).subscribe( (response: IPagedResponse ) => {
+          this.tasks = response.tasks
+          this.totalPages = response.pages.totalPages
+          this.currentPage = response.pages.currentPage
+        }
+    )
+  }
+
+  active(index: number): string {
+    if (index == this.currentPage) {
+      return "active"
+    }
+
+    return ""
   }
 }
