@@ -46,6 +46,19 @@ export class IssuesListComponent implements OnInit {
     )
   }
 
+  getStatusClass(status: string): string {
+    if( status == "DONE" )
+    {
+      return "bg-success";
+    }
+    else if( status == "IN_PROGRESS" )
+    {
+      return "bg-secondary";
+    }
+
+    return "bg-primary";
+  }
+
   active(index: number): string {
     if (index == this.currentPage) {
       return "active"
