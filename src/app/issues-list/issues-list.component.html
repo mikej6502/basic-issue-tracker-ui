@@ -17,9 +17,9 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>Type</th>
                 <th>Project</th>
                 <th>Title</th>
-                <th>Type</th>
                 <th>Status</th>
             </tr>
             </thead>
@@ -28,9 +28,9 @@
                 <td>
                     <a [routerLink]="['/issues', task.id]">{{task.id}}</a>
                 </td>
+                <td>{{task.type}}</td>
                 <td>{{task.project}}</td>
                 <td>{{task.title}}</td>
-                <td>{{task.type}}</td>
                 <td><span class="badge" [ngClass]="getStatusClass(task.status)">{{task.status | ConvertStatus}}</span>
                 </td>
             </tr>
@@ -39,7 +39,7 @@
     </div>
 </div>
 
-<div class="card-footer d-flex justify-content-center">
+<div class="card-footer d-flex justify-content-center fixed-bottom" style="height: 100px" *ngIf='totalPages > 1'>
   <div>
     <ul class="pagination">
       <li class="page-item" *ngFor="let _ of counter(); let i = index" [ngClass]="active(i)">

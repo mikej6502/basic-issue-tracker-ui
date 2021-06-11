@@ -3,7 +3,7 @@ import {ITask} from "./task";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from '../environments/environment'
-import {IPagedResponse} from "./paged-response";
+import {ITaskResponse} from "./task-response";
 
 @Injectable({
     providedIn: 'root'
@@ -19,8 +19,8 @@ export class IssueService {
         return this.http.get<ITask>(this.baseUrl + '/task/' + id);
     }
 
-    getIssues(pageNo: number): Observable<IPagedResponse> {
-        return this.http.get<IPagedResponse>(this.baseUrl + '/task?pageNo=' + pageNo + '&pageSize=10&sortBy=id');
+    getIssues(pageNo: number): Observable<ITaskResponse> {
+        return this.http.get<ITaskResponse>(this.baseUrl + '/task?pageNo=' + pageNo + '&pageSize=10&sortBy=id');
     }
 
     postIssue(task: ITask): Observable<any> {

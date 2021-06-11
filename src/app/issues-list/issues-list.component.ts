@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ITask} from "../task";
 import {IssueService} from "./../issue.service";
 import {Router} from "@angular/router";
-import {IPagedResponse} from "../paged-response";
+import {ITaskResponse} from "../task-response";
 
 
 @Component({
@@ -20,7 +20,7 @@ export class IssuesListComponent implements OnInit {
   constructor(private issuesService: IssueService, private router: Router) { }
 
   ngOnInit(): void {
-    this.issuesService.getIssues(0).subscribe( (response: IPagedResponse ) => {
+    this.issuesService.getIssues(0).subscribe( (response: ITaskResponse ) => {
       this.tasks = response.tasks
       this.totalPages = response.pages.totalPages
       this.currentPage = response.pages.currentPage
@@ -38,7 +38,7 @@ export class IssuesListComponent implements OnInit {
 
 
   onGetPage(index: number): void {
-    this.issuesService.getIssues(index).subscribe( (response: IPagedResponse ) => {
+    this.issuesService.getIssues(index).subscribe( (response: ITaskResponse ) => {
           this.tasks = response.tasks
           this.totalPages = response.pages.totalPages
           this.currentPage = response.pages.currentPage
