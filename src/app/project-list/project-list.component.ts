@@ -14,18 +14,16 @@ export class ProjectListComponent implements OnInit {
     projects: IProject[] = []
     totalPages = 0
     currentPage = 0
+    loading = true
+    timeout = false
+    timeoutTimer: any
 
     constructor(private projectService: ProjectService) {
 
     }
 
     ngOnInit(): void {
-        this.projectService.getProjects(0).subscribe((response: IProjectResponse) => {
-                this.projects = response.projects
-                this.totalPages = response.pages.totalPages
-                this.currentPage = response.pages.currentPage
-            }
-        )
+        this.onGetPage(0)
     }
 
     counter() {
@@ -41,11 +39,27 @@ export class ProjectListComponent implements OnInit {
     }
 
     onGetPage(index: number): void {
+        this.timeoutTimer = setTimeout(() => {
+            if( this.loading ) {
+                this.timeout = true
+                this.loading = false
+            }
+        }, 3_000);
+
+        this.loading = true
+
         this.projectService.getProjects(index).subscribe( (response: IProjectResponse ) => {
                 this.projects = response.projects
                 this.totalPages = response.pages.totalPages
                 this.currentPage = response.pages.currentPage
+
+                this.loading = false
+                clearTimeout(this.timeoutTimer)
             }
         )
+    }
+
+    onNewProject(): void {
+
     }
 }

@@ -1,43 +1,54 @@
-<div class="card border-primary">
+<div class="card justify-content-center align-items-center" *ngIf="loading">
+    <div class="card-body">Fetching data...</div>
+    <div class="card-body">
+        <div class="spinner-border text-primary justify-content-center" role="status">
+        </div>
+    </div>
+</div>
+
+<div class="card border-primary" *ngIf="!loading">
     <div class="card-header">{{pageTitle}}
-<!--        <button style="float:right" type="button" class="btn btn-primary" (click)="onNewIssue()">+ New Issue</button>-->
+        <button style="float:right" type="button" class="btn btn-primary" (click)="onNewProject()">+ New Project
+        </button>
     </div>
-</div>
-
-<div class='card-body'>
-    <div>
-        <tr *ngIf="projects.length == 0">
-            <td>No Issues found</td>
-        </tr>
-
-        <table class='table table-hover' *ngIf='projects.length'>
-            <thead>
-            <tr>
-                <th>Project Key</th>
-                <th>Title</th>
-                <th>Description</th>
+    <div class="card-body">
+        <div class="alert alert-dismissible alert-danger" *ngIf="timeout">
+            <strong>Error!</strong>Unable to fetching data. Request timed out.
+        </div>
+        <div>
+            <tr *ngIf="projects.length == 0">
+                <td>No Issues found</td>
             </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor='let project of projects'>
-                <td>
-                    <a [routerLink]="['/projects', project.id]">{{project.key}}</a>
-                </td>
-                <td>{{project.title}}</td>
-                <td>{{project.description}}</td>
-            </tr>
-            </tbody>
-        </table>
+            <table class='table table-hover' *ngIf='projects.length'>
+                <thead>
+                <tr>
+                    <th>Project Key</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor='let project of projects'>
+                    <td>
+                        <a [routerLink]="['/projects', project.id]">{{project.key}}</a>
+                    </td>
+                    <td>{{project.title}}</td>
+                    <td>{{project.description}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
-<div class="card-footer d-flex justify-content-center fixed-bottom" style="height: 100px" *ngIf='totalPages > 1'>
-    <div>
-        <ul class="pagination">
-            <li class="page-item" *ngFor="let _ of counter(); let i = index" [ngClass]="active(i)">
-                <a (click)="onGetPage(i)" class="page-link">{{i + 1}}</a>
-            </li>
-        </ul>
+    <div class="card-footer d-flex justify-content-center fixed-bottom" style="height: 100px"
+         *ngIf='totalPages > 1'>
+        <div>
+            <ul class="pagination">
+                <li class="page-item" *ngFor="let _ of counter(); let i = index" [ngClass]="active(i)">
+                    <a (click)="onGetPage(i)" class="page-link">{{i + 1}}</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 
