@@ -24,21 +24,19 @@
         <table class='table table-hover' *ngIf="tasks.length">
             <thead>
             <tr>
-                <th>ID</th>
+                <th>Title</th>
                 <th>Type</th>
                 <th>Project</th>
-                <th>Title</th>
                 <th>Status</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor='let task of tasks'>
                 <td>
-                    <a [routerLink]="['/issues', task.id]">{{task.id}}</a>
+                    <a [routerLink]="['/issues', task.id]">{{task.title}}</a>
                 </td>
                 <td>{{task.type}}</td>
                 <td>{{task.project}}</td>
-                <td>{{task.title}}</td>
                 <td><span class="badge" [ngClass]="getStatusClass(task.status)">{{task.status | ConvertStatus}}</span>
                 </td>
             </tr>
