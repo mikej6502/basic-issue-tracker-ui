@@ -3,6 +3,8 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IProjectResponse} from "../project-response";
+import {ITask} from "../task";
+import {IProject} from "./project";
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +19,17 @@ export class ProjectService {
 
   getProjects(pageNo: number): Observable<IProjectResponse> {
     return this.http.get<IProjectResponse>(this.baseUrl + '/project?pageNo=' + pageNo + '&pageSize=10&sortBy=id');
+  }
+
+  getProject(id: String): Observable<IProject> {
+    return this.http.get<IProject>(this.baseUrl + '/project/' + id);
+  }
+
+  createProject(project: IProject): Observable<any> {
+    return this.http.post(this.baseUrl + '/project', project)
+  }
+
+  updateProject(id: String, project: IProject): Observable<any> {
+    return this.http.put(this.baseUrl + '/project/' + id, project)
   }
 }

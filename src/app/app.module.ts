@@ -12,6 +12,7 @@ import { CreateIssueComponent } from './create-issue/create-issue.component';
 import {FormsModule} from "@angular/forms";
 import { FooterComponent } from './components/footer/footer.component';
 import { ProjectListComponent } from './project-list/project-list.component';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { ProjectListComponent } from './project-list/project-list.component';
         ConvertStatusPipe,
         CreateIssueComponent,
         FooterComponent,
-        ProjectListComponent
+        ProjectListComponent,
+        ProjectDetailComponent
     ],
     imports: [
         BrowserModule,
@@ -33,6 +35,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
                 {path: 'issues', component: IssuesListComponent},
                 {path: 'issues/:id', component: IssueDetailComponent},
                 {path: 'projects', component: ProjectListComponent},
+                {path: 'projects/:id', component: ProjectDetailComponent},
                 {path: 'home', component: HomeComponent},
                 {path: '', redirectTo: 'home', pathMatch: 'full'},
                 {path: '**', redirectTo: 'home', pathMatch: 'full'}

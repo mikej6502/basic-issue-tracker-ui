@@ -13,8 +13,7 @@
         <table class='table table-hover' *ngIf='projects.length'>
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Key</th>
+                <th>Project Key</th>
                 <th>Title</th>
                 <th>Description</th>
             </tr>
@@ -22,9 +21,8 @@
             <tbody>
             <tr *ngFor='let project of projects'>
                 <td>
-                    <a [routerLink]="['/issues', project.id]">{{project.id}}</a>
+                    <a [routerLink]="['/projects', project.id]">{{project.key}}</a>
                 </td>
-                <td>{{project.key}}</td>
                 <td>{{project.title}}</td>
                 <td>{{project.description}}</td>
             </tr>
