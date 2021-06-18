@@ -44,7 +44,7 @@ export class ProjectListComponent implements OnInit {
                 this.timeout = true
                 this.loading = false
             }
-        }, 3_000);
+        }, 15_000);
 
         this.loading = true
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ITask} from "../task";
 import {IssueService} from "./../issue.service";
 import {Router} from "@angular/router";
@@ -6,64 +6,71 @@ import {ITaskResponse} from "../task-response";
 
 
 @Component({
-  selector: 'app-issues-list',
-  templateUrl: './issues-list.component.html',
-  styleUrls: ['./issues-list.component.css']
+    selector: 'app-issues-list',
+    templateUrl: './issues-list.component.html',
+    styleUrls: ['./issues-list.component.css']
 })
 export class IssuesListComponent implements OnInit {
 
-  pageTitle = "Issues";
-  tasks: ITask[] = []
-  totalPages = 0
-  currentPage = 0
+    pageTitle = "Issues";
+    tasks: ITask[] = []
+    totalPages = 0
+    currentPage = 0
+    loading = true
+    timeout = false
+    timeoutTimer: any
 
-  constructor(private issuesService: IssueService, private router: Router) { }
-
-  ngOnInit(): void {
-    this.issuesService.getIssues(0).subscribe( (response: ITaskResponse ) => {
-      this.tasks = response.tasks
-      this.totalPages = response.pages.totalPages
-      this.currentPage = response.pages.currentPage
+    constructor(private issuesService: IssueService, private router: Router) {
     }
-   )
-  }
 
-  counter() {
-    return new Array(this.totalPages);
-  }
+    ngOnInit(): void {
+        this.onGetPage(0)
+    }
 
-  onNewIssue(): void {
-    this.router.navigate(['create']);
-  }
+    counter() {
+        return new Array(this.totalPages);
+    }
+
+    onNewIssue(): void {
+        this.router.navigate(['create']);
+    }
 
 
-  onGetPage(index: number): void {
-    this.issuesService.getIssues(index).subscribe( (response: ITaskResponse ) => {
-          this.tasks = response.tasks
-          this.totalPages = response.pages.totalPages
-          this.currentPage = response.pages.currentPage
+    onGetPage(index: number): void {
+        this.timeoutTimer = setTimeout(() => {
+            if (this.loading) {
+                this.timeout = true
+                this.loading = false
+            }
+        }, 15_000);
+
+        this.loading = true
+        this.issuesService.getIssues(index).subscribe((response: ITaskResponse) => {
+                this.tasks = response.tasks
+                this.totalPages = response.pages.totalPages
+                this.currentPage = response.pages.currentPage
+
+                this.loading = false
+                clearTimeout(this.timeoutTimer)
+            }
+        )
+    }
+
+    getStatusClass(status: string): string {
+        if (status == "DONE") {
+            return "bg-success";
+        } else if (status == "IN_PROGRESS") {
+            return "bg-secondary";
         }
-    )
-  }
 
-  getStatusClass(status: string): string {
-    if( status == "DONE" )
-    {
-      return "bg-success";
-    }
-    else if( status == "IN_PROGRESS" )
-    {
-      return "bg-secondary";
+        return "bg-primary";
     }
 
-    return "bg-primary";
-  }
+    active(index: number): string {
+        if (index == this.currentPage) {
+            return "active"
+        }
 
-  active(index: number): string {
-    if (index == this.currentPage) {
-      return "active"
+        return ""
     }
-
-    return ""
-  }
 }

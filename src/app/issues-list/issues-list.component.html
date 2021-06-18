@@ -1,16 +1,27 @@
-<div class="card border-primary">
+<div class="card justify-content-center align-items-center" *ngIf="loading">
+    <div class="card-body">Fetching data...</div>
+    <div class="card-body">
+        <div class="spinner-border text-primary justify-content-center" role="status">
+        </div>
+    </div>
+</div>
+
+<div class="card border-primary" *ngIf="!loading">
     <div class="card-header">{{pageTitle}}
         <button style="float:right" type="button" class="btn btn-primary" (click)="onNewIssue()">+ New Issue</button>
     </div>
 </div>
 
 <div class='card-body'>
+    <div class="alert alert-dismissible alert-danger" *ngIf="timeout">
+        <strong>Error!</strong>Unable to fetching data. Request timed out.
+    </div>
     <div>
-        <tr *ngIf="tasks.length == 0">
-            <td>No Issues found</td>
-        </tr>
+        <div *ngIf="tasks.length == 0">
+            No Issues found
+        </div>
 
-        <table class='table table-hover' *ngIf='tasks.length'>
+        <table class='table table-hover' *ngIf="tasks.length">
             <thead>
             <tr>
                 <th>ID</th>
