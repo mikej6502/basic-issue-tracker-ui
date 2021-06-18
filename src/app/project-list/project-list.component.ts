@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IProject} from "./project";
 import {ProjectService} from "./project.service";
 import {IProjectResponse} from "../project-response";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-project-list',
@@ -18,7 +19,7 @@ export class ProjectListComponent implements OnInit {
     timeout = false
     timeoutTimer: any
 
-    constructor(private projectService: ProjectService) {
+    constructor(private projectService: ProjectService, private router: Router) {
 
     }
 
@@ -60,6 +61,6 @@ export class ProjectListComponent implements OnInit {
     }
 
     onNewProject(): void {
-
+        this.router.navigate(['new-project']);
     }
 }

@@ -13,6 +13,7 @@ import {FormsModule} from "@angular/forms";
 import { FooterComponent } from './components/footer/footer.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
 @NgModule({
     declarations: [
@@ -24,14 +25,16 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
         CreateIssueComponent,
         FooterComponent,
         ProjectListComponent,
-        ProjectDetailComponent
+        ProjectDetailComponent,
+        CreateProjectComponent
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
         RouterModule.forRoot(
             [
-                {path: 'create', component: CreateIssueComponent},
+                {path: 'new-issue', component: CreateIssueComponent},
+                {path: 'new-project', component: CreateProjectComponent},
                 {path: 'issues', component: IssuesListComponent},
                 {path: 'issues/:id', component: IssueDetailComponent},
                 {path: 'projects', component: ProjectListComponent},

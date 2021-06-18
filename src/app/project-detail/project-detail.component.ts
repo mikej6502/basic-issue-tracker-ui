@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ITask} from "../task";
 import {ActivatedRoute, Router} from "@angular/router";
-import {IssueService} from "../issue.service";
 import {IProject} from "../project-list/project";
 import {ProjectService} from "../project-list/project.service";
 

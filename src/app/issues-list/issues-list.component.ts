@@ -32,7 +32,7 @@ export class IssuesListComponent implements OnInit {
     }
 
     onNewIssue(): void {
-        this.router.navigate(['create']);
+        this.router.navigate(['new-issue']);
     }
 
 
