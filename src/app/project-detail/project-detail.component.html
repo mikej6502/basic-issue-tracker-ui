@@ -1,0 +1,35 @@
+<div class="card border-primary" style="margin: 10px">
+    <div class="card-header"><b>{{pageTitle}}</b></div>
+    <div class="card-body" *ngIf='project'>
+        <form (ngSubmit)="onSave()" #taskForm="ngForm">
+
+            <div class="form-group">
+                <label for="key" class="form-label mt-4">Project Key</label>
+                <input style="width: 400px" type="text" class="form-control" id="key" placeholder="Project Key" [(ngModel)]="project.key" name="key" #name="ngModel">
+            </div>
+
+            <div class="form-group">
+                <label for="title" class="form-label mt-4">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="Title" [(ngModel)]="project.title" name="title" #name="ngModel">
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="form-label mt-4">Description</label>
+                <textarea class="form-control" id="description" rows="5" [(ngModel)]="project.description" name="description" #name="ngModel"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button type="button" class="btn btn-danger"(click)="onBack()">Back</button>
+        <button type="submit" class="btn btn-primary" (click)="onSave()" style="float:right">Save</button>
+    </div>
+
+    <div class="alert alert-dismissible alert-danger" *ngIf="error">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Error!</strong><br>Unable to save issue
+    </div>
+</div>
+
+
+
+
