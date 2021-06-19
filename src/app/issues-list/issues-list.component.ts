@@ -61,6 +61,8 @@ export class IssuesListComponent implements OnInit {
             return "bg-success";
         } else if (status == "IN_PROGRESS") {
             return "bg-secondary";
+        } else if (status == "DELETED") {
+            return "bg-danger";
         }
 
         return "bg-primary";
