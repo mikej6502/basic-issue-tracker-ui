@@ -49,7 +49,7 @@ export class ProjectListComponent implements OnInit {
 
         this.loading = true
 
-        this.projectService.getProjects(index).subscribe( (response: IProjectResponse ) => {
+        this.projectService.getProjects(index, 15).subscribe( (response: IProjectResponse ) => {
                 this.projects = response.projects
                 this.totalPages = response.pages.totalPages
                 this.currentPage = response.pages.currentPage

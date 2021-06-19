@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { ITask } from "../task";
 import {IssueService} from "./../issue.service";
+import {ProjectService} from "../project-list/project.service";
+import {IProjectResponse} from "../project-response";
+import {IProject} from "../project-list/project";
 
 @Component({
   selector: 'app-issue-detail',
@@ -12,10 +15,12 @@ export class IssueDetailComponent implements OnInit {
   pageTitle = 'Issue'
   task: ITask | undefined
   error = false;
+  projects: IProject[] = []
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private issueService: IssueService) {
+              private issueService: IssueService,
+              private projectService: ProjectService ) {
   }
 
   ngOnInit(): void {
@@ -24,6 +29,11 @@ export class IssueDetailComponent implements OnInit {
 
     this.issueService.getIssue(id)
         .subscribe( task => this.task = task);
+
+    this.projectService.getProjects(0, 250).subscribe( (response: IProjectResponse ) => {
+          this.projects = response.projects
+        }
+    )
   }
 
   onSave(): void {

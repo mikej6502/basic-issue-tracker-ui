@@ -5,7 +5,8 @@
 
             <div class="form-group">
                 <label for="issueType" class="form-label mt-4">Issue Type</label>
-                <select style="width: 200px" class="form-select" id="issueType" [(ngModel)]="task.type" name="type" #name="ngModel" >
+                <select style="width: 200px" class="form-select" id="issueType" [(ngModel)]="task.type" name="type"
+                        #name="ngModel">
                     <option>THEME</option>
                     <option>EPIC</option>
                     <option>STORY</option>
@@ -13,35 +14,39 @@
                     <option>BUG</option>
                 </select>
 
+                <div class="form-group">
+                    <label for="status" class="form-label mt-4">Status</label>
+                    <select style="width: 200px" class="form-select" id="status" [(ngModel)]="task.status" name="status"
+                            #name="ngModel">
+                        <option value="TODO">Todo</option>
+                        <option value="IN_PROGRESS">In progress</option>
+                        <option value="DONE">Done</option>
+                        <option value="DELETED">Deleted</option>
+                    </select>
+                </div>
+            </div>
             <div class="form-group">
-                <label for="status" class="form-label mt-4">Status</label>
-                <select style="width: 200px" class="form-select" id="status" [(ngModel)]="task.status" name="status" #name="ngModel">
-                    <option value="TODO">Todo</option>
-                    <option value="IN_PROGRESS">In progress</option>
-                    <option value="DONE">Done</option>
-                    <option value="DELETED">Deleted</option>
+                <label for="project" class="form-label mt-4">Project Key</label>
+                <select style="width: 400px" id="project" name="project" [(ngModel)]="task.project" class="form-select">
+                    <option *ngFor="let project of projects" [ngValue]="project.key">{{project.key}}</option>
                 </select>
-            </div>
-
-            </div>
-            <div class="form-group">
-                <label for="project" class="form-label mt-4">Project</label>
-                <input style="width: 400px" type="text" class="form-control" id="project" placeholder="Project" [(ngModel)]="task.project" name="project" #name="ngModel">
             </div>
 
             <div class="form-group">
                 <label for="exampleInputTitle" class="form-label mt-4">Title</label>
-                <input type="text" class="form-control" id="exampleInputTitle" placeholder="Title" [(ngModel)]="task.title" name="title" #name="ngModel">
+                <input type="text" class="form-control" id="exampleInputTitle" placeholder="Title"
+                       [(ngModel)]="task.title" name="title" #name="ngModel">
             </div>
 
             <div class="form-group">
                 <label for="exampleTextarea" class="form-label mt-4">Description</label>
-                <textarea class="form-control" id="exampleTextarea" rows="5" [(ngModel)]="task.description" name="description" #name="ngModel"></textarea>
+                <textarea class="form-control" id="exampleTextarea" rows="5" [(ngModel)]="task.description"
+                          name="description" #name="ngModel"></textarea>
             </div>
         </form>
     </div>
     <div class="card-footer">
-        <button type="button" class="btn btn-danger"(click)="onBack()">Back</button>
+        <button type="button" class="btn btn-danger" (click)="onBack()">Back</button>
         <button type="submit" class="btn btn-primary" (click)="onSave()" style="float:right">Save</button>
     </div>
 

@@ -17,8 +17,8 @@ export class ProjectService {
 
   }
 
-  getProjects(pageNo: number): Observable<IProjectResponse> {
-    return this.http.get<IProjectResponse>(this.baseUrl + '/project?pageNo=' + pageNo + '&pageSize=10&sortBy=id');
+  getProjects(pageNo: number, pageSize: number): Observable<IProjectResponse> {
+    return this.http.get<IProjectResponse>(this.baseUrl + '/project?pageNo=' + pageNo + '&pageSize=' + pageSize + '&sortBy=id');
   }
 
   getProject(id: String): Observable<IProject> {

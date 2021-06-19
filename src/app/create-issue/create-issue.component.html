@@ -13,10 +13,12 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="project" class="form-label mt-4">Project</label>
-                    <input type="text" class="form-control" id="project" placeholder="Project" [(ngModel)]="task.project" name="project" #name="ngModel">
-                </div>
+            <div class="form-group">
+                <label for="project" class="form-label mt-4">Project Key</label>
+                <select style="width: 400px" id="project" name="project" [(ngModel)]="task.project" class="form-select">
+                    <option *ngFor="let project of projects" [ngValue]="project.key">{{project.key}}</option>
+                </select>
+            </div>
 
                 <div class="form-group">
                     <label for="exampleInputTitle" class="form-label mt-4">Title</label>
